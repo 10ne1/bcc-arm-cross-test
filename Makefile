@@ -18,3 +18,13 @@ go-build:
 
 clean:
 	rm -f ${FILENAME}*
+
+dump-ebpf-asm:
+	clang \
+                --target=armv7a-linux-gnueabihf \
+                -D__KERNEL__ -fno-stack-protector -Wno-int-conversion \
+                -O2 -emit-llvm -c "src/${FILENAME}.c" \
+                -I ${LINUX_SRC_ROOT}/include \
+                -I ${LINUX_SRC_ROOT}/tools/testing/selftests \
+                -I ${LINUX_SRC_ROOT}/arch/arm/include \
+                -o - -S
