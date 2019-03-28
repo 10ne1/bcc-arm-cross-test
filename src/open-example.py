@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from bcc import BPF, USDT
+from bcc import BPF
 import time
 
 csrc = """
